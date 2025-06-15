@@ -5,6 +5,7 @@ import { EntityManager, Repository } from 'typeorm';
 import { OrderOrmEntity } from '../orm-entities/order';
 import { OrderEntity } from '../../domain/entities/order';
 import { OrderRepository as Base } from '../../domain/repositories/order';
+import { InfrastructureException } from 'src/common/exceptions/infrastructure';
 
 @Injectable()
 export class OrderRepository implements Base {
@@ -14,12 +15,20 @@ export class OrderRepository implements Base {
   ) {}
 
   async save(entity: OrderEntity) {
-    await this.repo.save(OrderMapper.mapToORM(entity));
+    try {
+      await this.repo.save(OrderMapper.mapToORM(entity));
+    } catch (error) {
+      throw new InfrastructureException('Cannot fetch data from DB', error);
+    }
   }
 
   async getById(id: string) {
-    const result = await this.repo.findOne({ where: { id } });
-    return result ? OrderMapper.mapToDomain(result) : null;
+    try {
+      const result = await this.repo.findOne({ where: { id } });
+      return result ? OrderMapper.mapToDomain(result) : null;
+    } catch (error) {
+      throw new InfrastructureException('Cannot fetch data from DB', error);
+    }
   }
 
   withTransaction(manager: EntityManager) {
