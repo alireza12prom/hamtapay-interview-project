@@ -1,19 +1,21 @@
 import { Module } from '@nestjs/common';
-import { MarketDataService } from './infrastructure/services/market-data';
-import { InventoryService } from './infrastructure/services/inventory';
+import { HttpMarketDataAdaptor } from './infrastructure/adaptors/market-data';
+import { HttpInventoryAdaptor } from './infrastructure/adaptors/inventory';
 import { PricingRuleService } from './domain/services/pricing-rule';
 import { MarketDataPort } from './domain/ports/market-data';
 import { InventoryPort } from './domain/ports/inventory';
 import { PricingController } from './interfaces/http/controller';
 import { CalculatePriceService } from './application/services/pricing';
+import { HttpModule } from '@nestjs/axios';
 
 @Module({
+  imports: [HttpModule],
   controllers: [PricingController],
   providers: [
     PricingRuleService,
     CalculatePriceService,
-    { provide: MarketDataPort, useClass: MarketDataService },
-    { provide: InventoryPort, useClass: InventoryService },
+    { provide: MarketDataPort, useClass: HttpMarketDataAdaptor },
+    { provide: InventoryPort, useClass: HttpInventoryAdaptor },
   ],
 })
 export class PricingModule {}
