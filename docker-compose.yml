@@ -1,0 +1,68 @@
+
+services:
+  pricing-service:
+    container_name: pricing-service
+    build:
+      context: ./pricing-service
+      dockerfile: Dockerfile
+    ports:
+      - "8001:8001"
+    networks:
+      - app_net
+
+  order-service:
+    container_name: order-service
+    depends_on:
+      - postgres
+    build:
+      context: ./order-service
+      dockerfile: Dockerfile
+    ports:
+      - "8003:8001"
+    networks:
+      - app_net
+      - postgres_net
+  
+  market-data-service:
+    container_name: market-data-service
+    depends_on:
+      - redis
+    build:
+      context: ./market-data-service
+      dockerfile: Dockerfile
+    ports:
+      - "8002:8001"
+    networks:
+      - app_net
+      - redis_net
+
+  postgres:
+    image: postgres
+    restart: always
+    environment:
+      - POSTGRES_USER=hamtapay
+      - POSTGRES_PASSWORD=hamtapay
+    container_name: postgres
+    volumes:
+      - db:/var/lib/postgresql/data
+      - ./initdb/init.sql:/docker-entrypoint-initdb.d/db.sql:ro
+    ports:
+      - '5432:5432'
+    networks:
+      - postgres_net
+
+  redis:
+    image: redis
+    restart: always
+    ports:
+      - "6379:6379"
+    networks:
+      - redis_net
+
+volumes:
+  db:
+
+networks:
+  app_net:
+  redis_net:
+  postgres_net:
