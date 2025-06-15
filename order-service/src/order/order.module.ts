@@ -11,10 +11,14 @@ import { PlaceOrderUseCase } from './application/usecases/place-order';
 import { GetInventoryUseCase } from './application/usecases/get-inventory';
 import { InventoryOrmEntity } from './dal/orm-entities/inventory';
 import { InventorySeeds } from './dal/seeds/inventory';
+import { HttpModule } from '@nestjs/axios';
 
 @Module({
+  imports: [
+    HttpModule,
+    TypeOrmModule.forFeature([InventoryOrmEntity, OrderOrmEntity]),
+  ],
   controllers: [OrderController],
-  imports: [TypeOrmModule.forFeature([InventoryOrmEntity, OrderOrmEntity])],
   providers: [
     InventorySeeds,
     PlaceOrderUseCase,
