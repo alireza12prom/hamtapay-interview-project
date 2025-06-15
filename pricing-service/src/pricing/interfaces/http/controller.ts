@@ -1,13 +1,13 @@
 import { Controller, Get } from '@nestjs/common';
-import { CalculatePriceService } from 'src/pricing/application/services/pricing';
+import { CalculatePriceUseCase } from '../../application/usecases/pricing';
 
 @Controller({ path: 'price', version: '1' })
 export class PricingController {
-  constructor(private readonly calculatePrice: CalculatePriceService) {}
+  constructor(private readonly calculatePriceUseCase: CalculatePriceUseCase) {}
 
   @Get('/')
-  async get(): Promise<{ price: number }> {
-    const price = await this.calculatePrice.execute();
-    return { price: parseFloat(price.toFixed(2)) };
+  async get() {
+    const result = await this.calculatePriceUseCase.execute();
+    return result;
   }
 }

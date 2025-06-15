@@ -1,13 +1,8 @@
-export class GoldPrice {
-  constructor(private readonly value: number) {
-    if (value <= 0) throw new Error('Price must be greater than 0');
-  }
+import { ValueObject } from '../../../lib/value-object';
 
-  get raw(): number {
-    return this.value;
-  }
-
+export class GoldPrice extends ValueObject<number> {
   increaseByPercent(percent: number): GoldPrice {
-    return new GoldPrice(this.value * (1 + percent / 100));
+    const amount = this.value * (1 + percent / 100);
+    return new GoldPrice(Number(amount.toFixed(2)));
   }
 }
