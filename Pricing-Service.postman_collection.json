@@ -1,0 +1,172 @@
+{
+	"info": {
+		"_postman_id": "8a6c7119-3cc2-493d-90f2-b5d60b893284",
+		"name": "Pricing-Service",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "24222018"
+	},
+	"item": [
+		{
+			"name": "Pricing-Service",
+			"item": [
+				{
+					"name": "Get Price",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{pricing-service_hostname}}/v1/price",
+							"host": [
+								"{{pricing-service_hostname}}"
+							],
+							"path": [
+								"v1",
+								"price"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Order-Service",
+			"item": [
+				{
+					"name": "Place Order",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"units\": 5\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{order-service_hostname}}/v1/order",
+							"host": [
+								"{{order-service_hostname}}"
+							],
+							"path": [
+								"v1",
+								"order"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Order",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{order-service_hostname}}/v1/order/:orderId",
+							"host": [
+								"{{order-service_hostname}}"
+							],
+							"path": [
+								"v1",
+								"order",
+								":orderId"
+							],
+							"variable": [
+								{
+									"key": "orderId",
+									"value": "9b6666d4-e768-47fe-ae3b-00077e156f27"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Inventory",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{order-service_hostname}}/v1/order/inventory",
+							"host": [
+								"{{order-service_hostname}}"
+							],
+							"path": [
+								"v1",
+								"order",
+								"inventory"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Market-Data-Service",
+			"item": [
+				{
+					"name": "Get Gold Price",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{market-data-service_hostname}}/v1/market-data/gold",
+							"host": [
+								"{{market-data-service_hostname}}"
+							],
+							"path": [
+								"v1",
+								"market-data",
+								"gold"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "pricing-service_hostname",
+			"value": "http://localhost:8000",
+			"type": "string"
+		},
+		{
+			"key": "order-service_hostname",
+			"value": "http://localhost:8001",
+			"type": "string"
+		},
+		{
+			"key": "market-data-service_hostname",
+			"value": "http://localhost:8002",
+			"type": "string"
+		}
+	]
+}
