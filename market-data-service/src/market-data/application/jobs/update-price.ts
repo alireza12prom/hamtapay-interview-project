@@ -13,7 +13,7 @@ export class UpdateGoldPriceJob {
     private readonly goldPriceRepository: GoldPriceRepository,
   ) {}
 
-  @Cron('*/30 * * * * *')
+  @Cron('0 * * * * *')
   async handle() {
     try {
       const goldPrice = await this.goldPricePort.get();
