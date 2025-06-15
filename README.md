@@ -1,3 +1,12 @@
+<h1 align="center"> ⚠️ توجه ⚠️</h1>
+
+<p align="center">
+با اینکه برای انجام این پروژه چهار روز فرصت داده شده بود، متأسفانه به دلیل مشغله‌های شخصی و محدودیت زمانی، موفق شدم تنها <b> حدود ۶ ساعت</b> برای این پروژه وقت بگذارم. بابت این موضوع صمیمانه عذرخواهی می‌کنم.
+به همین دلیل، پیاده‌سازی بخش Notification Service انجام نشده و باقی مانده است. در صورت در اختیار داشتن زمان بیشتر، حتماً این بخش را نیز تکمیل و به همراه تست‌های مربوطه ارائه می‌دادم.
+</p>
+
+<br>
+
 # HamtaPay Microservices
 
 HamtaPay Microservices is a distributed system composed of several independent services designed for handling market data, order management, and pricing logic. Each service is built with [NestJS](https://nestjs.com/) and communicates via HTTP APIs. The project is structured for scalability, maintainability, and ease of deployment using Docker.
