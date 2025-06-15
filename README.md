@@ -11,6 +11,9 @@
 
 HamtaPay Microservices is a distributed system composed of several independent services designed for handling market data, order management, and pricing logic. Each service is built with [NestJS](https://nestjs.com/) and communicates via HTTP APIs. The project is structured for scalability, maintainability, and ease of deployment using Docker.
 
+
+> **Note:** For fetching the gold price, the project uses the [brsapi.ir](https://brsapi.ir/) webservice.
+
 ## Project Structure
 
 ```
